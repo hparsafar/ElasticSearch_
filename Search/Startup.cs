@@ -36,12 +36,12 @@ namespace Search
                 .DefaultIndex("capitals");
 
             services.AddSingleton(settings);
-
+            services.AddScoped<IElasticClient, ElasticClient>();
             services.AddScoped(s =>
             {
                 var connectionSettings = s.GetRequiredService<ConnectionSettings>();
                 var client = new ElasticClient(connectionSettings);
-
+                
                 return client;
             });
 

@@ -3,6 +3,7 @@ using System.IO.Abstractions;
 using System.Linq;
 using System.Threading.Tasks;
 using CsvHelper;
+using CsvHelper.Configuration;
 using Nest;
 using Search.Models.Csv;
 
@@ -12,9 +13,9 @@ namespace Search.Models.Elasticsearch
     {
         public const string IndexName = "capitals";
         private readonly IFileSystem fileSystem;
-        private ElasticClient client;
+        private IElasticClient client;
 
-        public CapitalCities(ElasticClient client, IFileSystem _fileSystem)
+        public CapitalCities(IElasticClient client, IFileSystem _fileSystem)
         {
             this.client = client;
             fileSystem = _fileSystem;

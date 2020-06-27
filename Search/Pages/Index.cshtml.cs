@@ -45,7 +45,7 @@ namespace Search.Pages
 										.Match(m => m
 											.Field(f => f.Names)
 											.Query(Term)
-											.Fuzziness(Fuzziness.EditDistance(1))
+											.Fuzziness(Fuzziness.EditDistance(3))
 										)
 									)
 									.Take(10)
@@ -71,53 +71,6 @@ namespace Search.Pages
 		}
 
 
-		public void OnGetSearch()
-		{
-
-		}
-
-		public void OnGetFuzzySearch()
-		{
-			if (!string.IsNullOrWhiteSpace(Term))
-			{
-				Search =
-					client.Search<CapitalSearchDocument>(s =>
-						s.Query(q => q
-								.Match(m => m
-									.Field(f => f.Names)
-									.Query(Term)
-									.Fuzziness(Fuzziness.EditDistance(1))
-								)
-							)
-							.Take(10)
-					);
-			}
-		}
-
-		public void OnPostWork3()
-		{
-			//  Msg = "Work 3";
-		}
-		public void OnGetWork1(string type)
-		{
-			if (type == "FuzzySearch")
-			{
-				if (!string.IsNullOrWhiteSpace(Term))
-				{
-					Search =
-						client.Search<CapitalSearchDocument>(s =>
-							s.Query(q => q
-									.Match(m => m
-										.Field(f => f.Names)
-										.Query(Term)
-										.Fuzziness(Fuzziness.EditDistance(1))
-									)
-								)
-								.Take(10)
-						);
-				}
-			}
-		}
 
 		public string MapImageUrl(CapitalCityRecord result)
 		{
