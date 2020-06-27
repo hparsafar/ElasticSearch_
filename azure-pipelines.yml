@@ -32,6 +32,6 @@ steps:
   displayName: Build
   inputs:
     command: build
+    projects: '**/Search.csproject'
     arguments: '--configuration $(buildConfiguration)' # Update this to match your need
-
 
