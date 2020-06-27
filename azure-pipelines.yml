@@ -22,12 +22,11 @@ steps:
     packageType: runtime
 
 
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
   inputs:
     command: 'restore'
+    restoreSolution: '**/*.sln'
     feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
