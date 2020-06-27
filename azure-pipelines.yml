@@ -21,17 +21,15 @@ steps:
     version: '2.2.x'
     packageType: runtime
 
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    restoreSolution: '**/*.sln'
     feedsToUse: 'select'
+    vstsFeed: 'c3fe9dbd-49bf-4327-be98-d9d87d6ab317'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
   inputs:
-    command: build
+    command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)' # Update this to match your need
+
 
