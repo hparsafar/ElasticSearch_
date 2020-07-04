@@ -9,16 +9,17 @@ using Search.Models.Csv;
 
 namespace Search.Models.Elasticsearch
 {
-    public class CapitalCities
+    public class DataImporter
     {
         public const string IndexName = "capitals";
         private readonly IFileSystem fileSystem;
-        private IElasticClient client;
+        private ElasticClient client;
 
-        public CapitalCities(IElasticClient client, IFileSystem _fileSystem)
+        public DataImporter(ElasticClient client, IFileSystem _fileSystem)
         {
             this.client = client;
             fileSystem = _fileSystem;
+            
         }
 
         public async Task RunAsync()
@@ -48,17 +49,9 @@ namespace Search.Models.Elasticsearch
 
             
             // let's load the data
-            var file = fileSystem.File.Open("capital_cities.csv", FileMode.Open);
-            using (var csv = new CsvReader(new StreamReader(file)))
-            {
-                // describe's the csv file
-                csv.Configuration.RegisterClassMap<CapitalCitiesMapping>();
-
-                var records = csv
-                    .GetRecords<CapitalCityRecord>()
-                    .Select(record => new CapitalSearchDocument(record))
-                    .ToList();
-
+         
+            var records=CsvProcessor.ProcessCsvFiles(fileSystem);
+                          
                 // we are pushing all the data in at once
                 var bullkResult =
                     await client
@@ -66,7 +59,7 @@ namespace Search.Models.Elasticsearch
                         .Index(IndexName)
                         .CreateMany(records)
                     );
-            }
+            
         }
     }
 }

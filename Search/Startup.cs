@@ -36,7 +36,6 @@ namespace Search
                 .DefaultIndex("capitals");
 
             services.AddSingleton(settings);
-            services.AddScoped<IElasticClient, ElasticClient>();
             services.AddScoped(s =>
             {
                 var connectionSettings = s.GetRequiredService<ConnectionSettings>();
@@ -48,7 +47,7 @@ namespace Search
 
             services.AddScoped<IFileSystem, FileSystem>();
             // 2. Register Capital City Loader
-            services.AddScoped<CapitalCities>();
+            services.AddScoped<DataImporter>();
             
 
             services.Configure<CookiePolicyOptions>(options =>

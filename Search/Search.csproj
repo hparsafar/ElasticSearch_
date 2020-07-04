@@ -13,6 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Interface\**" />
+    <Content Remove="Models\Interface\**" />
+    <EmbeddedResource Remove="Models\Interface\**" />
+    <None Remove="Models\Interface\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="CsvHelper" Version="12.1.2" />
 	  <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.0" />

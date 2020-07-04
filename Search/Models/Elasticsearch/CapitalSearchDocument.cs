@@ -7,10 +7,7 @@ namespace Search.Models.Elasticsearch
 {
     public class CapitalSearchDocument
     {
-        public CapitalSearchDocument()
-        {
-        }
-
+    
         public CapitalSearchDocument(CapitalCityRecord record)
         {
             Id = record.Id;
@@ -63,5 +60,22 @@ namespace Search.Models.Elasticsearch
         // store location
         [GeoPoint]
         public decimal[] Location { get; set; }
+
+        public override bool Equals(object o)
+        {
+            var result = false;
+            var capitalSearchDocument = o as CapitalSearchDocument;
+            if (capitalSearchDocument != null)
+            {
+                result = Id == capitalSearchDocument.Id;
+                result &= City.Equals(capitalSearchDocument.City);
+                result &= City.Equals(capitalSearchDocument.City);
+                result &= Location.Equals(capitalSearchDocument.Location);
+                return result;
+            }
+            return false;
+        }
+
+
     }
 }

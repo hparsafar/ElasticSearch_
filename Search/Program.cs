@@ -18,7 +18,7 @@ namespace Search
             // load records from Csv to Elasticsearch
             using (var scope = host.Services.CreateScope())
             {
-                var loader = scope.ServiceProvider.GetRequiredService<CapitalCities>();
+                var loader = scope.ServiceProvider.GetRequiredService<DataImporter>();
                 await loader.RunAsync();
             }
 
